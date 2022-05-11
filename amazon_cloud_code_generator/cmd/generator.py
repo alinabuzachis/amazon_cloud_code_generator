@@ -382,5 +382,5 @@ class CloudFormationWrapper:
         """
         # TODO: include version
         response = self.client.describe_type(Type="RESOURCE", TypeName=type_name)
-
+        print(response.get("Schema"))
         return response.get("Schema")

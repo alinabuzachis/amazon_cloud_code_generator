@@ -218,7 +218,14 @@ def generate_schema(raw_content) -> Dict:
 
     for key, value in schema.items():
         if isinstance(value, list):
-            schema[key] = [camel_to_snake(p.split("/")[-1].strip()) for p in value]
+            elems =[]
+            for v in value:
+                if isinstance(v, list):
+                    elems.extend([camel_to_snake(p.split("/")[-1].strip()) for p in v])
+                else:
+                    elems.append(camel_to_snake(v.split("/")[-1].strip()))
+
+            schema[key] = elems
 
     return schema
 
