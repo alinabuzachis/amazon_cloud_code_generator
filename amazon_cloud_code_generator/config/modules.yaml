@@ -79,9 +79,3 @@
     documentation:
       short_description: Specifies the Object Lambda Access Point resource policy document
       description: Create and manage Object Lambda Access Point resource policy document (create, update, describe, delete).
-- dynamo_db_global_table:
-- eks_fargate_profile:
-- eks_addon:
-#- wa_fv2_web_acl:
-- wa_fv2_web_ip_set:
-- wa_fv2_regex_pattern_set:

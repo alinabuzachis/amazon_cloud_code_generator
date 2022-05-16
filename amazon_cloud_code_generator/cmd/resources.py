@@ -25,11 +25,4 @@ RESOURCES = [
     "AWS::S3::MultiRegionAccessPointPolicy",
     "AWS::S3ObjectLambda::AccessPoint",
     "AWS::S3ObjectLambda::AccessPointPolicy",
-    # multiple primary identifiers
-    "AWS::DynamoDB::GlobalTable",
-    "AWS::EKS::FargateProfile",
-    #"AWS::WAFv2::WebACL",
-    "AWS::EKS::Addon",
-    "AWS::WAFv2::IPSet",
-    "AWS::WAFv2::RegexPatternSet",
 ]

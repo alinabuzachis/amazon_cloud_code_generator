@@ -113,7 +113,9 @@ def indent(text_block: str, indent: int = 0) -> str:
 
 def generate_params(definitions: Iterable) -> str:
     params: str = ""
-    keys = sorted(definitions.keys() - ["wait", "wait_timeout", "state", "purge_tags"])
+    keys = sorted(
+        definitions.keys() - ["wait", "wait_timeout", "state", "purge_tags", "force"]
+    )
     for key in keys:
         params += f"\nparams['{key}'] = module.params.get('{key}')"
 
@@ -218,7 +220,7 @@ def generate_schema(raw_content) -> Dict:
 
     for key, value in schema.items():
         if isinstance(value, list):
-            elems =[]
+            elems = []
             for v in value:
                 if isinstance(v, list):
                     elems.extend([camel_to_snake(p.split("/")[-1].strip()) for p in v])
