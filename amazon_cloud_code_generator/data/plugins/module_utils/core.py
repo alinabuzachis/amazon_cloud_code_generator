@@ -325,10 +325,6 @@ class CloudControlResource(object):
     def wait_for_in_progress_requests(
         self, in_progress_requests: List, identifier: str
     ):
-        # Dont warn if nothing to wait on
-        if not in_progress_requests:
-            return
-
         self.module.warn(
             f"There is one or more IN PROGRESS operations on {identifier}. Wait until there are no more IN PROGRESS operations before proceding."
         )
@@ -429,7 +425,7 @@ class CloudControlResource(object):
                        [tag for tag in v_exisiting if tag not in v_in] == []:
                         continue
                 # If purge, then replace old resource
-                if self.module.params.get("purge_{0}".format(k.lower())) == True:
+                if self.module.params.get("purge_{0}".format(k.lower())):
                     strategy = "replace"
                 # Add difference to JSON patch
                 patch.append(make_op(k, v_exisiting, v_in, strategy))
