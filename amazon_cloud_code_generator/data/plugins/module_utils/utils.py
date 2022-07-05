@@ -45,8 +45,6 @@ def _jsonify(data: Dict) -> Dict:
     identifier = data.get("Identifier", None)
     # Convert the Resource Properties from a str back to json
     properties = json.loads(data.get("Properties", None))
-    if properties and "Tags" in properties:
-        properties["tags"] = boto3_tag_list_to_ansible_dict(properties["Tags"])
     data = {"identifier": identifier, "properties": properties}
     return data
 
@@ -100,7 +98,11 @@ def normalize_response(response: Iterable):
         res = [_jsonify(r_d) for r_d in resource_descriptions]
         return camel_dict_to_snake_dict(*res)
     else:
-        return camel_dict_to_snake_dict(_jsonify(resource_descriptions))
+        res = _jsonify(resource_descriptions)
+        res = camel_dict_to_snake_dict(res)
+        if 'tags' in res['properties']:
+            res['properties']['tags'] = boto3_tag_list_to_ansible_dict(res['properties']['tags'])
+        return res
 
 
 def ansible_dict_to_boto3_tag_list(
